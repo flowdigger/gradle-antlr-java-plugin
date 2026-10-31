@@ -369,6 +369,21 @@ tasks.register('coverage') {
     description = 'Runs tests, generates JaCoCo report, and verifies minimum coverage threshold.'
     dependsOn tasks.named('jacocoTestCoverageVerification')
 }
+
+tasks.named('check') {
+    dependsOn tasks.named('verifyGrammarSources')
+    dependsOn tasks.named('verifyJarLayout')
+    dependsOn tasks.named('jacocoTestCoverageVerification')
+}
+
+tasks.register('allSecurityChecks') {
+    group = 'verification'
+    description = 'Run dependency and static analysis checks.'
+    dependsOn tasks.named('check')
+    def dependencyCheckTask = tasks.findByName('dependencyCheck') ?: tasks.findByName('dependencyCheckAnalyze')
+    if (dependencyCheckTask != null) {
+        dependsOn dependencyCheckTask
+    }
     dependsOn tasks.named('spotbugsMain')
 }
 
