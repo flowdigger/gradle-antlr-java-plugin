@@ -2,16 +2,16 @@
 
 ![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
 
-[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/name.jurgenei.gradle.antlr.java?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/name.jurgenei.gradle.antlr.java)
-[![Build and Test](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/ci.yml)
-[![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/ci.yml)
-[![Coverage CI](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/coverage.yml)
-[![CodeQL](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/codeql.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/codeql.yml)
-[![Dependency Check](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/dependency-check.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/dependency-check.yml)
-[![SpotBugs Security](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/spotbugs-security.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/spotbugs-security.yml)
-[![Checkstyle](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/checkstyle.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/checkstyle.yml)
-[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/jurgenei/gradle-antlr-java-plugin/security/dependabot)
-[![Coverage](https://codecov.io/gh/jurgenei/gradle-antlr-java-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/jurgenei/gradle-antlr-java-plugin)
+[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/name.flowdigger.gradle.antlr.java?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/name.flowdigger.gradle.antlr.java)
+[![Build and Test](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/ci.yml)
+[![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/ci.yml)
+[![Coverage CI](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/coverage.yml)
+[![CodeQL](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/codeql.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/codeql.yml)
+[![Dependency Check](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/dependency-check.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/dependency-check.yml)
+[![SpotBugs Security](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/spotbugs-security.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/spotbugs-security.yml)
+[![Checkstyle](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/checkstyle.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/checkstyle.yml)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/flowdigger/gradle-antlr-java-plugin/security/dependabot)
+[![Coverage](https://codecov.io/gh/flowdigger/gradle-antlr-java-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/flowdigger/gradle-antlr-java-plugin)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/java-21+-green.svg)](https://www.oracle.com/java/)
 [![Gradle](https://img.shields.io/badge/gradle-9.5+-blue.svg)](https://gradle.org/)
@@ -34,7 +34,7 @@ Structured Knowledge -> XIR -> Observation -> Derivation -> Knowledge -> Applica
 
 ```groovy
 plugins {
-    id 'name.jurgenei.gradle.antlr.java' version '0.1.4'
+    id 'name.flowdigger.gradle.antlr.java' version '0.1.4'
 }
 ```
 
@@ -47,8 +47,8 @@ plugins {
 Default task conventions:
 
 - `grammar = java`
-- `parserClassName = name.jurgenei.parsers.JavaParser`
-- `lexerClassName = name.jurgenei.parsers.JavaLexer`
+- `parserClassName = name.flowdigger.parsers.JavaParser`
+- `lexerClassName = name.flowdigger.parsers.JavaLexer`
 - `startRule = compilationunit`
 - `includes = ['**/*.java']`
 
@@ -57,10 +57,10 @@ Default task conventions:
 ```groovy
 plugins {
     id 'java'
-    id 'name.jurgenei.gradle.antlr.java'
+    id 'name.flowdigger.gradle.antlr.java'
 }
 
-tasks.named('javaXmlAst', name.jurgenei.gradle.antlr.XmlAstJavaGradleTask) {
+tasks.named('javaXmlAst', name.flowdigger.gradle.antlr.XmlAstJavaGradleTask) {
     sourceDirectory.set(layout.projectDirectory.dir('src/main/java'))
     destinationDirectory.set(layout.buildDirectory.dir('xmlast-java'))
     targetExtension.set('.xml')
@@ -77,7 +77,7 @@ Run:
 S-expression output variant:
 
 ```groovy
-tasks.named('javaXmlAst', name.jurgenei.gradle.antlr.XmlAstJavaGradleTask) {
+tasks.named('javaXmlAst', name.flowdigger.gradle.antlr.XmlAstJavaGradleTask) {
     targetExtension.set('.xir')
     outputFormat.set('beautified')
 }
@@ -86,8 +86,8 @@ tasks.named('javaXmlAst', name.jurgenei.gradle.antlr.XmlAstJavaGradleTask) {
 ## Testing and Coverage
 
 - Java grammar sources:
-  - `src/main/antlr/name/jurgenei/parsers/JavaLexer.g4`
-  - `src/main/antlr/name/jurgenei/parsers/JavaParser.g4`
+  - `src/main/antlr/name/flowdigger/parsers/JavaLexer.g4`
+  - `src/main/antlr/name/flowdigger/parsers/JavaParser.g4`
 - Example corpus copied from `antlr/grammars-v4`:
   - `src/test/resources/examples`
 
