@@ -4,21 +4,21 @@ import java.security.MessageDigest
  * Java language parser plugin.
  * J.S. Hildebrand (c) 2026
  */
-import name.jurgenei.gradle.antlr.XmlAstGradleTask
+import org.flowdigger.gradle.antlr.XmlAstGradleTask
 
 plugins {
     id 'java'
     id 'antlr'
     id 'java-gradle-plugin'
     id 'jacoco'
-    id 'name.jurgenei.gradle.antlr' version '0.1.10'
+    id 'org.flowdigger.gradle.antlr' version '0.1.10'
     id 'maven-publish'
     id 'signing'
     id 'org.owasp.dependencycheck' version '10.0.3'
     id 'com.github.spotbugs' version '6.1.0'
 }
 
-group = 'name.jurgenei.gradle'
+group = 'org.flowdigger.gradle'
 version = '0.1.4'
 
 ext {
@@ -31,8 +31,8 @@ gradlePlugin {
     vcsUrl = 'https://github.com/jurgenei/gradle-antlr-java-plugin'
     plugins {
         xmlAstJava {
-            id = 'name.jurgenei.gradle.antlr.java'
-            implementationClass = 'name.jurgenei.gradle.antlr.XmlAstJavaPlugin'
+            id = 'org.flowdigger.gradle.antlr.java'
+            implementationClass = 'org.flowdigger.gradle.antlr.XmlAstJavaPlugin'
             displayName = 'Gradle ANTLR Java Plugin'
             description = 'Preconfigured XML AST task support for Java grammar parsing.'
             tags.set(['antlr', 'xml', 'ast', 'java'])
@@ -53,7 +53,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'name.jurgenei.gradle:gradle-antlr-plugin:0.1.11'
+    implementation 'org.flowdigger.gradle:gradle-antlr-plugin:0.1.11'
     implementation 'org.antlr:antlr4-runtime:4.13.2'
 
     antlr 'org.antlr:antlr4:4.13.2'
@@ -157,7 +157,7 @@ tasks.named('spotbugsTest', com.github.spotbugs.snom.SpotBugsTask) {
     enabled = false
 }
 
-def grammarDir = file('src/main/antlr/name/jurgenei/parsers')
+def grammarDir = file('src/main/antlr/org/flowdigger/parsers')
 def antlrOutputDir = file("$buildDir/generated-src/antlr/main")
 tasks.register('generateLexerSources', JavaExec) {
     group = 'build'
@@ -226,8 +226,8 @@ tasks.register('verifyGrammarSources') {
     group = 'verification'
     description = 'Checks that Java grammar source files are present.'
     def requiredFiles = [
-            file('src/main/antlr/name/jurgenei/parsers/JavaLexer.g4'),
-            file('src/main/antlr/name/jurgenei/parsers/JavaParser.g4')
+            file('src/main/antlr/org/flowdigger/parsers/JavaLexer.g4'),
+            file('src/main/antlr/org/flowdigger/parsers/JavaParser.g4')
     ]
     inputs.files(requiredFiles)
     doLast {
@@ -252,8 +252,8 @@ tasks.register('verifyJarLayout') {
         try {
             def entries = zip.entries().collect { it.name }
             def requiredEntries = [
-                    'name/jurgenei/parsers/JavaLexer.g4',
-                    'name/jurgenei/parsers/JavaParser.g4'
+                    'org/flowdigger/parsers/JavaLexer.g4',
+                    'org/flowdigger/parsers/JavaParser.g4'
             ]
             requiredEntries.each { path ->
                 if (!entries.contains(path)) {
@@ -261,10 +261,10 @@ tasks.register('verifyJarLayout') {
                 }
             }
             if (!entries.any { it ==~ /name\/jurgenei\/parsers\/JavaLexer(\$.*)?\.class/ }) {
-                throw new GradleException("Missing required lexer class entry under name/jurgenei/parsers in ${jarFile.name}")
+                throw new GradleException("Missing required lexer class entry under org/flowdigger/parsers in ${jarFile.name}")
             }
             if (!entries.any { it ==~ /name\/jurgenei\/parsers\/JavaParser(\$.*)?\.class/ }) {
-                throw new GradleException("Missing required parser class entry under name/jurgenei/parsers in ${jarFile.name}")
+                throw new GradleException("Missing required parser class entry under org/flowdigger/parsers in ${jarFile.name}")
             }
         } finally {
             zip.close()
@@ -285,8 +285,8 @@ def configureXmlAstTask = { XmlAstGradleTask taskRef, Object sourceDir, Object d
     taskRef.description = description
     taskRef.dependsOn tasks.named('classes')
     taskRef.grammar.set('java')
-    taskRef.parserClassName.set('name.jurgenei.parsers.JavaParser')
-    taskRef.lexerClassName.set('name.jurgenei.parsers.JavaLexer')
+    taskRef.parserClassName.set('org.flowdigger.parsers.JavaParser')
+    taskRef.lexerClassName.set('org.flowdigger.parsers.JavaLexer')
     taskRef.startRule.set('compilationunit')
     configureDirectoryProperty(taskRef.sourceDirectory, sourceDir)
     configureDirectoryProperty(taskRef.destinationDirectory, destDir)
@@ -336,7 +336,7 @@ tasks.named('test') {
 tasks.named('jacocoTestReport') {
     dependsOn tasks.named('test')
     classDirectories.setFrom(files(sourceSets.main.output.classesDirs.asFileTree.matching {
-        include 'name/jurgenei/gradle/antlr/**'
+        include 'org/flowdigger/gradle/antlr/**'
     }))
     sourceDirectories.setFrom(files(sourceSets.main.allSource.srcDirs))
     reports {
@@ -349,7 +349,7 @@ tasks.named('jacocoTestReport') {
 tasks.named('jacocoTestCoverageVerification') {
     dependsOn tasks.named('jacocoTestReport')
     classDirectories.setFrom(files(sourceSets.main.output.classesDirs.asFileTree.matching {
-        include 'name/jurgenei/gradle/antlr/**'
+        include 'org/flowdigger/gradle/antlr/**'
     }))
     sourceDirectories.setFrom(files(sourceSets.main.allSource.srcDirs))
     violationRules {

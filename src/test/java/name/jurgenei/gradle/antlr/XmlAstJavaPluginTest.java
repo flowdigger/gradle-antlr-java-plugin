@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.antlr;
+package org.flowdigger.gradle.antlr;
 
 import org.gradle.api.Project;
 import org.gradle.testfixtures.ProjectBuilder;
@@ -28,8 +28,8 @@ public class XmlAstJavaPluginTest {
 
         final XmlAstJavaGradleTask task = (XmlAstJavaGradleTask) project.getTasks().getByName("javaXmlAst");
         Assert.assertEquals("java", task.getGrammar().get());
-        Assert.assertEquals("name.jurgenei.parsers.JavaParser", task.getParserClassName().get());
-        Assert.assertEquals("name.jurgenei.parsers.JavaLexer", task.getLexerClassName().get());
+        Assert.assertEquals("org.flowdigger.parsers.JavaParser", task.getParserClassName().get());
+        Assert.assertEquals("org.flowdigger.parsers.JavaLexer", task.getLexerClassName().get());
         Assert.assertEquals("compilationunit", task.getStartRule().get());
         Assert.assertTrue(task.getIncludes().get().contains("**/*.java"));
         Assert.assertEquals(".xml", task.getTargetExtension().get());

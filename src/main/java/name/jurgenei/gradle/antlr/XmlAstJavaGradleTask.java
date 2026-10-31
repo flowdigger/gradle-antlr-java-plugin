@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.antlr;
+package org.flowdigger.gradle.antlr;
 
 import org.gradle.api.model.ObjectFactory;
 import org.gradle.work.DisableCachingByDefault;
@@ -22,8 +22,8 @@ public abstract class XmlAstJavaGradleTask extends XmlAstGradleTask {
         super(objects);
         LanguageTaskDefaults.of(
                 "java",
-                "name.jurgenei.parsers.JavaParser",
-                "name.jurgenei.parsers.JavaLexer",
+                "org.flowdigger.parsers.JavaParser",
+                "org.flowdigger.parsers.JavaLexer",
                 "compilationunit",
                 List.of("**/*.java"))
             .applyTo(this);

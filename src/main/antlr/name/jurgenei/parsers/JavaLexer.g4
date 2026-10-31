@@ -37,7 +37,7 @@
 lexer grammar JavaLexer;
 
 @header {
-package name.jurgenei.parsers;
+package org.flowdigger.parsers;
 }
 
 // Keywords
