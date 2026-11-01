@@ -2,7 +2,7 @@
 
 ![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
 
-[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/name.jurgenei.gradle.antlr.java?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/name.jurgenei.gradle.antlr.java)
+[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/org.flowdigger.gradle.antlr.java?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/org.flowdigger.gradle.antlr.java)
 [![Build and Test](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/ci.yml)
 [![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/ci.yml)
 [![Coverage CI](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/coverage.yml)
@@ -34,7 +34,7 @@ Structured Knowledge -> XIR -> Observation -> Derivation -> Knowledge -> Applica
 
 ```groovy
 plugins {
-    id 'name.jurgenei.gradle.antlr.java' version '0.1.4'
+    id 'org.flowdigger.gradle.antlr.java' version '0.1.4'
 }
 ```
 
@@ -47,8 +47,8 @@ plugins {
 Default task conventions:
 
 - `grammar = java`
-- `parserClassName = name.jurgenei.parsers.JavaParser`
-- `lexerClassName = name.jurgenei.parsers.JavaLexer`
+- `parserClassName = org.flowdigger.parsers.JavaParser`
+- `lexerClassName = org.flowdigger.parsers.JavaLexer`
 - `startRule = compilationunit`
 - `includes = ['**/*.java']`
 
@@ -57,10 +57,10 @@ Default task conventions:
 ```groovy
 plugins {
     id 'java'
-    id 'name.jurgenei.gradle.antlr.java'
+    id 'org.flowdigger.gradle.antlr.java'
 }
 
-tasks.named('javaXmlAst', name.jurgenei.gradle.antlr.XmlAstJavaGradleTask) {
+tasks.named('javaXmlAst', org.flowdigger.gradle.antlr.XmlAstJavaGradleTask) {
     sourceDirectory.set(layout.projectDirectory.dir('src/main/java'))
     destinationDirectory.set(layout.buildDirectory.dir('xmlast-java'))
     targetExtension.set('.xml')
@@ -77,7 +77,7 @@ Run:
 S-expression output variant:
 
 ```groovy
-tasks.named('javaXmlAst', name.jurgenei.gradle.antlr.XmlAstJavaGradleTask) {
+tasks.named('javaXmlAst', org.flowdigger.gradle.antlr.XmlAstJavaGradleTask) {
     targetExtension.set('.xir')
     outputFormat.set('beautified')
 }
@@ -86,8 +86,8 @@ tasks.named('javaXmlAst', name.jurgenei.gradle.antlr.XmlAstJavaGradleTask) {
 ## Testing and Coverage
 
 - Java grammar sources:
-  - `src/main/antlr/name/jurgenei/parsers/JavaLexer.g4`
-  - `src/main/antlr/name/jurgenei/parsers/JavaParser.g4`
+  - `src/main/antlr/org/flowdigger/parsers/JavaLexer.g4`
+  - `src/main/antlr/org/flowdigger/parsers/JavaParser.g4`
 - Example corpus copied from `antlr/grammars-v4`:
   - `src/test/resources/examples`
 

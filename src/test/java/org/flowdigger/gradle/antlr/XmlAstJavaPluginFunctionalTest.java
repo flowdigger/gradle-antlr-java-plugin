@@ -1,4 +1,4 @@
-package name.jurgenei.gradle.antlr;
+package org.flowdigger.gradle.antlr;
 
 import org.gradle.testkit.runner.BuildResult;
 import org.gradle.testkit.runner.GradleRunner;
@@ -23,7 +23,7 @@ public class XmlAstJavaPluginFunctionalTest {
         writeBuildFile(projectDir, """
                 plugins {
                     id 'java'
-                    id 'name.jurgenei.gradle.antlr.java'
+                    id 'org.flowdigger.gradle.antlr.java'
                 }
                 """);
 
@@ -38,7 +38,7 @@ public class XmlAstJavaPluginFunctionalTest {
         writeBuildFile(projectDir, """
                 plugins {
                     id 'java'
-                    id 'name.jurgenei.gradle.antlr.java'
+                    id 'org.flowdigger.gradle.antlr.java'
                 }
 
                 tasks.register('printJavaDefaults') {
@@ -58,8 +58,8 @@ public class XmlAstJavaPluginFunctionalTest {
         final String output = result.getOutput();
 
         Assert.assertTrue(output.contains("grammar=java"));
-        Assert.assertTrue(output.contains("parserClassName=name.jurgenei.parsers.JavaParser"));
-        Assert.assertTrue(output.contains("lexerClassName=name.jurgenei.parsers.JavaLexer"));
+        Assert.assertTrue(output.contains("parserClassName=org.flowdigger.parsers.JavaParser"));
+        Assert.assertTrue(output.contains("lexerClassName=org.flowdigger.parsers.JavaLexer"));
         Assert.assertTrue(output.contains("startRule=compilationunit"));
         Assert.assertTrue(output.contains("targetExtension=.xml"));
         Assert.assertTrue(output.contains("outputFormat=compact"));
@@ -72,10 +72,10 @@ public class XmlAstJavaPluginFunctionalTest {
         writeBuildFile(projectDir, """
                 plugins {
                     id 'java'
-                    id 'name.jurgenei.gradle.antlr.java'
+                    id 'org.flowdigger.gradle.antlr.java'
                 }
 
-                tasks.named('javaXmlAst', name.jurgenei.gradle.antlr.XmlAstJavaGradleTask) {
+                tasks.named('javaXmlAst', org.flowdigger.gradle.antlr.XmlAstJavaGradleTask) {
                     targetExtension.set('.xir')
                     outputFormat.set('beautified')
                 }

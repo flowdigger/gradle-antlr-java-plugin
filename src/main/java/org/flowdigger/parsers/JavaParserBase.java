@@ -1,4 +1,4 @@
-package name.jurgenei.parsers;
+package org.flowdigger.parsers;
 
 import org.antlr.v4.runtime.*;
 import java.io.Writer;

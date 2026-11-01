@@ -1,4 +1,4 @@
-package name.jurgenei.parsers;
+package org.flowdigger.parsers;
 
 import org.antlr.v4.runtime.BaseErrorListener;
 import org.antlr.v4.runtime.CharStream;
@@ -37,8 +37,8 @@ public class JavaLexerParserTest {
     }
 
     private void loadParserClasses() throws Exception {
-        final Class<?> lexerClass = Class.forName("name.jurgenei.parsers.JavaLexer");
-        final Class<?> parserClass = Class.forName("name.jurgenei.parsers.JavaParser");
+        final Class<?> lexerClass = Class.forName("org.flowdigger.parsers.JavaLexer");
+        final Class<?> parserClass = Class.forName("org.flowdigger.parsers.JavaParser");
         lexerConstructor = lexerClass.getConstructor(CharStream.class);
         parserConstructor = parserClass.getConstructor(TokenStream.class);
         compilationUnitMethod = parserClass.getMethod("compilationunit");
