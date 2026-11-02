@@ -157,7 +157,7 @@ tasks.named('spotbugsTest', com.github.spotbugs.snom.SpotBugsTask) {
     enabled = false
 }
 
-def grammarDir = file('src/main/antlr/org/flowdigger/parsers')
+def grammarDir = file('src/main/antlr/name/jurgenei/parsers')
 def antlrOutputDir = file("$buildDir/generated-src/antlr/main")
 tasks.register('generateLexerSources', JavaExec) {
     group = 'build'
@@ -226,8 +226,8 @@ tasks.register('verifyGrammarSources') {
     group = 'verification'
     description = 'Checks that Java grammar source files are present.'
     def requiredFiles = [
-            file('src/main/antlr/org/flowdigger/parsers/JavaLexer.g4'),
-            file('src/main/antlr/org/flowdigger/parsers/JavaParser.g4')
+            file('src/main/antlr/name/jurgenei/parsers/JavaLexer.g4'),
+            file('src/main/antlr/name/jurgenei/parsers/JavaParser.g4')
     ]
     inputs.files(requiredFiles)
     doLast {
