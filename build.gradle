@@ -52,7 +52,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.flowdigger.gradle:gradle-antlr-plugin:0.1.11'
+    implementation("org.flowdigger.gradle:gradle-antlr-plugin:1.0.0")
     implementation 'org.antlr:antlr4-runtime:4.13.2'
 
     antlr 'org.antlr:antlr4:4.13.2'
@@ -245,10 +245,10 @@ tasks.register('verifyJarLayout') {
                     throw new GradleException("Missing required jar entry: ${path} in ${jarFile.name}")
                 }
             }
-            if (!entries.any { it ==~ /name\/jurgenei\/parsers\/JavaLexer(\$.*)?\.class/ }) {
+            if (!entries.any { it ==~ /org\/flowdigger\/parsers\/JavaLexer(\$.*)?\.class/ }) {
                 throw new GradleException("Missing required lexer class entry under org/flowdigger/parsers in ${jarFile.name}")
             }
-            if (!entries.any { it ==~ /name\/jurgenei\/parsers\/JavaParser(\$.*)?\.class/ }) {
+            if (!entries.any { it ==~ /org\/flowdigger\/parsers\/JavaParser(\$.*)?\.class/ }) {
                 throw new GradleException("Missing required parser class entry under org/flowdigger/parsers in ${jarFile.name}")
             }
         } finally {
