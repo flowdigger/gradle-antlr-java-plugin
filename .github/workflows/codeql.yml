@@ -43,7 +43,7 @@ jobs:
           if git clone --depth 1 "https://github.com/$OWNER/gradle-antlr-plugin.git" "$ROOT_PARENT/gradle-antlr-plugin"; then
             exit 0
           fi
-          git clone --depth 1 "https://github.com/jurgenei/gradle-antlr-plugin.git" "$ROOT_PARENT/gradle-antlr-plugin"
+          git clone --depth 1 "https://github.com/flowdigger/gradle-antlr-plugin.git" "$ROOT_PARENT/gradle-antlr-plugin"
 
       - name: Autobuild
         run: |

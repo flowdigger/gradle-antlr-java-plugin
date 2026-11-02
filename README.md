@@ -2,16 +2,15 @@
 
 ![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
 
-[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/org.flowdigger.gradle.antlr.java?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/org.flowdigger.gradle.antlr.java)
-[![Build and Test](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/ci.yml)
-[![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/ci.yml)
-[![Coverage CI](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/coverage.yml)
-[![CodeQL](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/codeql.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/codeql.yml)
-[![Dependency Check](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/dependency-check.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/dependency-check.yml)
-[![SpotBugs Security](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/spotbugs-security.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/spotbugs-security.yml)
-[![Checkstyle](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/checkstyle.yml/badge.svg)](https://github.com/jurgenei/gradle-antlr-java-plugin/actions/workflows/checkstyle.yml)
-[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/jurgenei/gradle-antlr-java-plugin/security/dependabot)
-[![Coverage](https://codecov.io/gh/jurgenei/gradle-antlr-java-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/jurgenei/gradle-antlr-java-plugin)
+[![Build](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/ci.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/ci.yml)
+[![Release](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/release.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/release.yml)
+[![Coverage CI](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/coverage.yml)
+[![CodeQL](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/codeql.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/codeql.yml)
+[![Dependency Check](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/dependency-check.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/dependency-check.yml)
+[![SpotBugs Security](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/spotbugs-security.yml/badge.svg)](https://github.com/flowdigger/gradle-antlr-java-plugin/actions/workflows/spotbugs-security.yml)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/flowdigger/gradle-antlr-java-plugin/security/dependabot)
+[![Coverage](https://codecov.io/gh/flowdigger/gradle-antlr-java-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/flowdigger/gradle-antlr-java-plugin?branch=main)
+[![Maven Central](https://img.shields.io/maven-central/v/org.flowdigger.gradle/gradle-antlr-java-plugin.svg)](https://search.maven.org/artifact/org.flowdigger.gradle/gradle-antlr-java-plugin)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/java-21+-green.svg)](https://www.oracle.com/java/)
 [![Gradle](https://img.shields.io/badge/gradle-9.5+-blue.svg)](https://gradle.org/)
@@ -101,26 +100,22 @@ Commands:
 
 Coverage gate enforced in `check`: **60% line coverage minimum**.
 
-## Publish to Gradle Plugin Portal
+## Release to Maven Central
 
-Set credentials:
-
-```bash
-export GRADLE_PUBLISH_KEY=...
-export GRADLE_PUBLISH_SECRET=...
-```
-
-Optional signing for Maven publication:
+Set credentials and signing material:
 
 ```bash
+export ORG_GRADLE_PROJECT_mavenCentralUsername=...
+export ORG_GRADLE_PROJECT_mavenCentralPassword=...
 export ORG_GRADLE_PROJECT_signingKey=...
 export ORG_GRADLE_PROJECT_signingPassword=...
+export ORG_GRADLE_PROJECT_signingKeyId=...
 ```
 
-Publish:
+Build signed Central bundle:
 
 ```bash
-./gradlew publishPlugins
+./gradlew clean packageCentralBundle
 ```
 
 ## CI and Code Scans
@@ -128,6 +123,7 @@ Publish:
 - `.github/workflows/ci.yml` -> build + tests + SpotBugs + OWASP Dependency-Check
 - `.github/workflows/coverage.yml` -> JaCoCo + Codecov upload
 - `.github/workflows/codeql.yml` -> GitHub CodeQL analysis
+- `.github/workflows/release.yml` -> Maven Central bundle + Central Publisher upload
 - `.github/workflows/test-on-push.yml` -> fast test validation
 
 ## Troubleshooting
