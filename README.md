@@ -33,7 +33,7 @@ Structured Knowledge -> XIR -> Observation -> Derivation -> Knowledge -> Applica
 
 ```groovy
 plugins {
-    id 'org.flowdigger.gradle.antlr.java' version '0.1.4'
+    id 'org.flowdigger.gradle.antlr.java' version '1.0.0'
 }
 ```
 
