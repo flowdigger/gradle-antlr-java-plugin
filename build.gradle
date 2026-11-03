@@ -13,7 +13,7 @@ plugins {
     id 'org.flowdigger.gradle.antlr' version '1.0.0'
     id 'maven-publish'
     id 'signing'
-    id 'org.owasp.dependencycheck' version '10.0.3'
+    id 'org.owasp.dependencycheck' version '13.0.0'
     id 'com.github.spotbugs' version '6.1.0'
 }
 
@@ -117,11 +117,15 @@ signing {
 }
 
 dependencyCheck {
-    format = 'HTML,JSON,XML'
-    failBuildOnCVSS = 7.0
-    suppressionFile = 'dependency-check-suppressions.xml'
+    formats = ['HTML', 'JSON', 'XML']
+    failBuildOnCVSS = 7.0f
+    suppressionFile = file('dependency-check-suppressions.xml').absolutePath
     nvd {
-        apiKey = findProperty('org.owasp.dependencycheck.nvd.api.key') ?: System.getenv('NVD_API_KEY')
+        def resolvedApiKey = providers.gradleProperty('org.owasp.dependencycheck.nvd.api.key').orNull
+                ?: System.getenv('NVD_API_KEY')
+        if (resolvedApiKey?.trim()) {
+            apiKey = resolvedApiKey.trim()
+        }
     }
 }
 
