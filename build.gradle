@@ -13,12 +13,18 @@ plugins {
     id 'org.flowdigger.gradle.antlr' version '1.0.0'
     id 'maven-publish'
     id 'signing'
+    id 'checkstyle'
     id 'org.owasp.dependencycheck' version '13.0.0'
     id 'com.github.spotbugs' version '6.1.0'
 }
 
 group = 'org.flowdigger.gradle'
 version = '1.0.0'
+
+checkstyle {
+    toolVersion = '10.26.1'
+    configFile = file('checkstyle.xml')
+}
 
 ext {
     spotbugsEngineVersion = '4.8.6'
@@ -119,7 +125,15 @@ signing {
 dependencyCheck {
     formats = ['HTML', 'JSON', 'XML']
     failBuildOnCVSS = 7.0f
-    suppressionFile = file('dependency-check-suppressions.xml').absolutePath
+    def dependencyCheckSuppression = file('dependency-check-suppressions.xml')
+    if (dependencyCheckSuppression.exists()) {
+        suppressionFile = dependencyCheckSuppression.absolutePath
+    }
+    analyzers {
+        ossIndex {
+            enabled = false
+        }
+    }
     nvd {
         def resolvedApiKey = providers.gradleProperty('org.owasp.dependencycheck.nvd.api.key').orNull
                 ?: System.getenv('NVD_API_KEY')
