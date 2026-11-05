@@ -2,12 +2,15 @@ name: CodeQL
 
 on:
   push:
-    branches: [ "main", "release/**" ]
+    branches: ["main", "release/**"]
   pull_request:
-    branches: [ "main", "release/**" ]
+    branches: ["main", "release/**"]
+  schedule:
+    - cron: "0 2 * * 1"
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
   security-events: write
 
@@ -30,20 +33,6 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: gradle
-
-      - name: Ensure gradle-antlr-plugin is available
-        shell: bash
-        run: |
-          set -euo pipefail
-          ROOT_PARENT="$(dirname "$GITHUB_WORKSPACE")"
-          OWNER="${GITHUB_REPOSITORY_OWNER}"
-          if [ -d "$ROOT_PARENT/gradle-antlr-plugin/.git" ]; then
-            exit 0
-          fi
-          if git clone --depth 1 "https://github.com/$OWNER/gradle-antlr-plugin.git" "$ROOT_PARENT/gradle-antlr-plugin"; then
-            exit 0
-          fi
-          git clone --depth 1 "https://github.com/flowdigger/gradle-antlr-plugin.git" "$ROOT_PARENT/gradle-antlr-plugin"
 
       - name: Autobuild
         run: |
