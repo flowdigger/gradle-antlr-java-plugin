@@ -23,7 +23,7 @@ public class XmlAstJavaPluginFunctionalTest {
         writeBuildFile(projectDir, """
                 plugins {
                     id 'java'
-                    id 'org.flowdigger.gradle.antlr.java'
+                    id 'org.flowdigger.antlr.java'
                 }
                 """);
 
@@ -38,7 +38,7 @@ public class XmlAstJavaPluginFunctionalTest {
         writeBuildFile(projectDir, """
                 plugins {
                     id 'java'
-                    id 'org.flowdigger.gradle.antlr.java'
+                    id 'org.flowdigger.antlr.java'
                 }
 
                 tasks.register('printJavaDefaults') {
@@ -72,7 +72,7 @@ public class XmlAstJavaPluginFunctionalTest {
         writeBuildFile(projectDir, """
                 plugins {
                     id 'java'
-                    id 'org.flowdigger.gradle.antlr.java'
+                    id 'org.flowdigger.antlr.java'
                 }
 
                 tasks.named('javaXmlAst', org.flowdigger.gradle.antlr.XmlAstJavaGradleTask) {

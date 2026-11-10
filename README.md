@@ -33,7 +33,7 @@ Structured Knowledge -> XIR -> Observation -> Derivation -> Knowledge -> Applica
 
 ```groovy
 plugins {
-    id 'org.flowdigger.gradle.antlr.java' version '1.0.0'
+    id 'org.flowdigger.antlr.java' version '1.0.0'
 }
 ```
 
@@ -56,7 +56,7 @@ Default task conventions:
 ```groovy
 plugins {
     id 'java'
-    id 'org.flowdigger.gradle.antlr.java'
+    id 'org.flowdigger.antlr.java'
 }
 
 tasks.named('javaXmlAst', org.flowdigger.gradle.antlr.XmlAstJavaGradleTask) {
